@@ -249,3 +249,5 @@ Temporary Items
 
 ### Django ###
 *.pyc
+
+data/
