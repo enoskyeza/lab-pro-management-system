@@ -1,6 +1,7 @@
 from urllib import request
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 # from django.views.generic.edit import CreateView
 from django.views import generic
 
@@ -17,6 +18,9 @@ class PatientCreateView(generic.edit.CreateView):
     form_class = PatientForm
     template_name = 'patient_management/create_patient.html'
 
+    def get_success_url(self):
+        return reverse('patient-details', kwargs={'pk': self.object.id})
+
 class PatientUpdateView(generic.edit.UpdateView):
     model = Patient
     form_class = PatientForm
@@ -28,14 +32,9 @@ class PatientListView(generic.ListView):
     context_object_name = 'patient_list'
     
     def get_queryset(self):
-        return Patient.objects.all()
+        return Patient.objects.filter(is_deleted=False).all()
 
 class PatientDetailView(generic.DetailView):
     model = Patient
     template_name = 'patient_management/patient_details.html'
-    context_object_name = 'patient'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['patient'] = Patient.objects.all()
-        return context
+    
