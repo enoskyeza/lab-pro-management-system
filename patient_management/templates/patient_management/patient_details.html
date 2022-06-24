@@ -1,10 +1,14 @@
-<h1>{% object %} Details </h1>
-<p>Surname          :   {% object.surname %}</p>
-<p>Given Name       :   {% object.given_name %}</p>
-<p>Age              :   {% object.age %}</p>
-<p>Contact          :   {% object.contact %}</p>
-<p>Gender           :   {% object.gender %}</p>
-<p>Address          :   {% object.address %}</p>
-<p>Identification   :   {% object.identification %}</p>
-<p>Nationality      :   {% object.nationality %}</p>
+{% block patient %}
+
+    <h1><strong>Patient Details</strong> </h1>
+    <p><strong>Surname          :</strong>   {{ object.surname }}</p>
+    <p><strong>Given Name       :</strong>   {{ object.given_name }}</p>
+    <p><strong>Age              :</strong>   {{ object.age }}</p>
+    <p><strong>Contact          :</strong>   {{ object.contact }}</p>
+    <p><strong>Gender           :</strong>   {{ object.gender }}</p>
+    <p><strong>Address          :</strong>   {{ object.address }}</p>
+    <p><strong>Identification   :</strong>   {{ object.identification }}</p>
+    <p><strong>Nationality      :</strong>   {{ object.nationality }}</p>
+
+{% endblock  %}
 
