@@ -11,4 +11,7 @@ class Patient(BaseModel):
     patient_id = models.CharField(max_length=15)
     address =models.CharField(max_length=15)
 
+    def __str__(self):
+        return '{} {}'.format(self.surname, self.given_name)
+        
 
