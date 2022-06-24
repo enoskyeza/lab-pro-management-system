@@ -10,7 +10,7 @@ class Patient(BaseModel):
 
     surname = models.CharField(max_length=50)
     given_name = models.CharField(max_length=50)
-    age = models.PositiveIntegerField()  
+    age = models.DateField()  
     gender = models.CharField(max_length=1, choices=GenderChoices.choices)
     nationality = models.CharField(max_length=50, null=True)
     identification = models.CharField(max_length=50, blank=True)
