@@ -1,38 +1,26 @@
 from urllib import request
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+# from django.views.generic.edit import CreateView
 from django.views import generic
 
 from patient_management.models import Patient
-from .forms import PatientCreationForm , PatientUpdateForm
+from .forms import PatientForm
 
 
 # Create your views here.
 def index(request):
     return render(request, 'patient_management/index.html')
 
-def create_patient(request):
-    if request.method == 'POST':
-        form = PatientUpdateForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('/patient_management/index.html')
-    else:
-        form = PatientUpdateForm()
+class PatientCreateView(generic.edit.CreateView):
+    model = Patient
+    form_class = PatientForm
+    template_name = 'patient_management/create_patient.html'
 
-    return render(request, 'patient_management/create_patient.html', {'form': PatientUpdateForm})
-
-def update_patient(request):
-
-    if request.method == 'POST':
-        form = PatientUpdateForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('patient_management/index.html')
-    else:
-        form = PatientUpdateForm()
-
-    return render(request, 'patient_management/update_patient.html', {'form': PatientUpdateForm})
-
-
+class PatientUpdateView(generic.edit.UpdateView):
+    model = Patient
+    form_class = PatientForm
+    template_name = 'patient_management/update_patient.html'
 
 class PatientListView(generic.ListView):
     model = Patient
@@ -44,4 +32,10 @@ class PatientListView(generic.ListView):
 
 class PatientDetailView(generic.DetailView):
     model = Patient
-    template_name = 'patient_management/patient_detail.html'
+    template_name = 'patient_management/patient_details.html'
+    context_object_name = 'patient'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['patient'] = Patient.objects.all()
+        return context
