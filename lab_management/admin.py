@@ -1,4 +1,3 @@
-from cgi import test
 from django.contrib import admin
 from .models import Test
 
