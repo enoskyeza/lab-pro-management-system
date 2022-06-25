@@ -1,6 +1,6 @@
 from cgi import test
 from django.contrib import admin
-from . import models
+from .models import Test
 
 # Register your models here.
-admin.site.register(models.Test)
+admin.site.register(Test)
