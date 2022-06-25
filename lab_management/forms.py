@@ -4,5 +4,5 @@ from .models import Test
 class TestForm(ModelForm):
     class Meta:
         model = Test
-        fields = '__all__'
+        exclude = ('created_at', 'deleted_at', 'is_deleted','updated_at')
         
