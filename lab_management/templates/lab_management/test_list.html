@@ -4,7 +4,7 @@
 
 {% if tests_list %}
     <ul>
-        {% for patient in object_list %}
+        {% for test in tests_list %}
             <li><a href="/test/{{ test.id }}/">{{ test }}</a></li>
         {% endfor %}
     </ul>

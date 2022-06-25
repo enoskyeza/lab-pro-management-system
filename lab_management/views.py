@@ -14,7 +14,7 @@ class TestCreateView(CreateView):
     form_class = TestForm
 
     def get_success_url(self):
-        return reverse('test-details', kwargs={'pk': self.object.id})
+        return reverse('test-list', kwargs={'pk': self.object.id})
 
 class TestUpdateView(UpdateView):
     model = Test
@@ -22,19 +22,19 @@ class TestUpdateView(UpdateView):
     form_class = TestForm
 
     def get_success_url(self):
-        return reverse('test-details', kwargs={'pk': self.object.id})
+        return reverse('test-list', kwargs={'pk': self.object.id})
 
 
 class TestListView(ListView):
     model = Test
     template_name = 'lab_management/test_list.html'
-    context_object_name = 'test_list'
+    context_object_name = 'tests_list'
 
     def get_queryset(self):
         return Test.objects.filter(is_deleted=False).all()    
 
 class TestDetailView(DetailView):
     model = Test
-    template_name = 'lab_management/test_list.html'
+    template_name = 'lab_management/test_details.html'
 
 
