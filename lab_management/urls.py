@@ -1,4 +1,4 @@
-from .views import *
+from lab_management.views import *
 from django.urls import path
 
 urlpatterns = [

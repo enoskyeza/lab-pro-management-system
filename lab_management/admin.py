@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Test
+from lab_management.models import Test, Sample, SampleType, TestRequest
 
 # Register your models here.
-admin.site.register(Test)
+
+my_models = [Test, Sample, SampleType, TestRequest]
+admin.site.register(my_models)
+

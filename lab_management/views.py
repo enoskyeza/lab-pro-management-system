@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Test
-from .forms import TestForm
+from lab_management.models import Test
+from lab_management.forms import TestForm
 from django.views.generic import *
 
 # Create your views here.

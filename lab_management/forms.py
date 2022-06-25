@@ -1,5 +1,5 @@
 from django.forms import ModelForm 
-from .models import Test
+from lab_management.models import Test
 
 class TestForm(ModelForm):
     class Meta:
