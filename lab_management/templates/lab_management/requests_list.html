@@ -1,0 +1,15 @@
+<h1>Requests list url is workinf fine</h1>
+
+<h1>List of Requests</h1>
+
+{% if requests_list %}
+    <ul>
+        {% for request in requests_list %}
+            <li><a href="{{ request.id }}/">{{ request }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No requests available.</p>
+
+{% endif %}
+
