@@ -12,9 +12,8 @@ class TestCreateView(CreateView):
     model = Test
     template_name = 'lab_management/create_test.html'
     form_class = TestForm
-
     def get_success_url(self):
-        return reverse('test-list', kwargs={'pk': self.object.id})
+        return reverse('tests-list')
 
 class TestUpdateView(UpdateView):
     model = Test
@@ -22,7 +21,7 @@ class TestUpdateView(UpdateView):
     form_class = TestForm
 
     def get_success_url(self):
-        return reverse('test-list', kwargs={'pk': self.object.id})
+        return reverse('tests-list')
 
 
 class TestListView(ListView):
@@ -43,7 +42,7 @@ class TestRequestCreateView(CreateView):
     form_class = TestRequestForm
 
     def get_success_url(self):
-     return reverse('requests-list', kwargs={'pk': self.object.id})
+     return reverse('requests-list')
 
 class TestRequestUpdateView(UpdateView):
     model = TestRequest
@@ -51,7 +50,7 @@ class TestRequestUpdateView(UpdateView):
     form_class = TestRequestForm
 
     def get_success_url(self):
-        return reverse('requests-list', kwargs={'pk': self.object.id})
+        return reverse('request-details', kwargs={'pk': self.object.id})
 
 class TestRequestListView(ListView):
     model: TestRequest
