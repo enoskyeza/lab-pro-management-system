@@ -4,9 +4,9 @@ from patient_management.models import Patient
 
 # Create your models here.
 class StatusChoices(models.TextChoices):
-    STARTED = 'S', ('STARTED')
-    IN_PROGRESS = 'I', ('IN PROGRESS')
-    COMPLETE = 'C', ('COMPLETE')
+    STARTED = 'STARTED', ('STARTED')
+    IN_PROGRESS = 'IN PROGRESS', ('IN PROGRESS')
+    COMPLETE = 'COMPLETED', ('COMPLETED')
 
 
 class Test(BaseModel):
