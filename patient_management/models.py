@@ -1,22 +1,21 @@
 from django.db import models
-from core.models import BaseModel
-# from django_countries.fields import CountryField
+from django.utils.translation import gettext_lazy as _
 
-# Create your models here.
+from core.models import BaseModel
+
+
 class Patient(BaseModel):
-    class GenderChoices(models.TextChoices):
-        MALE = 'M', ('MALE')
-        FEMALE = 'F', ('FEMALE')
+    class PatientGender(models.TextChoices):
+        MALE = 'M', _('MALE')
+        FEMALE = 'F', _('FEMALE')
 
     surname = models.CharField(max_length=50)
     given_name = models.CharField(max_length=50)
-    age = models.DateField()  
-    gender = models.CharField(max_length=1, choices=GenderChoices.choices)
-    nationality = models.CharField(max_length=50, null=True)
-    identification = models.CharField(max_length=50, blank=True)
-    address =models.CharField(max_length=100, blank=True)
+    age = models.DateField(verbose_name='Date of Birth')
+    gender = models.CharField(max_length=1, choices=PatientGender.choices)
+    nationality = models.CharField(max_length=50, null=True, blank=True)
+    id_number = models.CharField(verbose_name='ID Number', max_length=50, blank=True)
+    address = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return '{} {}'.format(self.surname, self.given_name)
-
-
+        return f'{self.surname} {self.given_name}'

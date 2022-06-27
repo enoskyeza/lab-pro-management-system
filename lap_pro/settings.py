@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'core',
     'patient_management',
+    'lab_management',
 
     'django.contrib.admin',
     'django.contrib.auth',
