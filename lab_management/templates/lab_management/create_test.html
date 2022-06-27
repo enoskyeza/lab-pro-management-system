@@ -1,0 +1,9 @@
+<h1>Create views and urls work well</h1>
+
+<h3>Create New Test </h3>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>

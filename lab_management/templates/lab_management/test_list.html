@@ -1,0 +1,15 @@
+<h1>List views and url work well</h1>
+
+<h1>List of Tests</h1>
+
+{% if tests_list %}
+    <ul>
+        {% for test in tests_list %}
+            <li><a href="/tests/{{ test.id }}/">{{ test }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No tests available.</p>
+
+{% endif %}
+
