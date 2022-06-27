@@ -1,9 +1,15 @@
-from unicodedata import name
-from lab_management.views import *
 from django.urls import path
 
+from lab_management import views
+from lab_management.views import (
+    TestCreateView, TestDetailView, TestListView, TestRequestCreateView, TestRequestDetailView, TestRequestListView,
+    TestRequestUpdateView, SampleCreateView, TestUpdateView
+)
+
+
+app_name = 'lab_management'
 urlpatterns = [
-    path('', index, name='test-index-view'),
+    path('', views.index, name='test-index-view'),
     path('list', TestListView.as_view(), name='tests-list'),
     path('<int:pk>/', TestDetailView.as_view(), name='test-details'),
     path('new/', TestCreateView.as_view(), name='create-test'),
