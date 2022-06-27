@@ -2,6 +2,8 @@ from unicodedata import name
 from lab_management.views import *
 from django.urls import path
 
+
+app_name = 'lab_management'
 urlpatterns = [
     path('', index, name='test-index-view'),
     path('list', TestListView.as_view(), name='tests-list'),
