@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
@@ -16,7 +16,7 @@ class TestCreateView(CreateView):
     model = Test
     template_name = 'lab_management/create_test.html'
     form_class = TestForm
-    success_url = reverse('lab_management:tests-list')
+    success_url = reverse_lazy('lab_management:tests-list')
 
 
 class TestUpdateView(UpdateView):
@@ -25,7 +25,7 @@ class TestUpdateView(UpdateView):
     form_class = TestForm
 
     def get_success_url(self):
-        return reverse('lab_management:test-details', kwargs={'pk': self.object.id})
+        return reverse_lazy('lab_management:test-details', kwargs={'pk': self.object.id})
 
 
 class TestListView(ListView):
@@ -44,7 +44,7 @@ class TestRequestCreateView(CreateView):
     model = TestRequest
     template_name = 'lab_management/create_request.html'
     form_class = TestRequestForm
-    success_url = reverse('lab_management:requests-list')
+    success_url = reverse_lazy('lab_management:requests-list')
 
 
 class TestRequestUpdateView(UpdateView):
@@ -53,7 +53,7 @@ class TestRequestUpdateView(UpdateView):
     form_class = TestRequestForm
 
     def get_success_url(self):
-        return reverse('lab_management:request-details', kwargs={'pk': self.object.id})
+        return reverse_lazy('lab_management:request-details', kwargs={'pk': self.object.id})
 
 
 class TestRequestListView(ListView):

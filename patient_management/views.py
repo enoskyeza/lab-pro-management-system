@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
@@ -16,16 +16,16 @@ class PatientCreateView(CreateView):
     model = Patient
     form_class = PatientForm
     template_name = 'patient_management/create_patient.html'
-
-    def get_success_url(self):
-        return reverse('patient_management:patient-list', kwargs={'pk': self.object.id})
+    success_url = reverse_lazy('patient_management:patient-list')
 
 
 class PatientUpdateView(UpdateView):
     model = Patient
     form_class = PatientForm
     template_name = 'patient_management/update_patient.html'
-    success_url = reverse('patient_management:patient-details')
+
+    def get_success_url(self):
+        return reverse_lazy('patient_management:patient-details', kwargs={'pk': self.object.id})
 
 
 class PatientListView(ListView):
