@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
@@ -59,7 +60,7 @@ class TestRequestUpdateView(UpdateView):
 
 class TestRequestListView(ListView):
     model = TestRequest
-    queryset = TestRequest.objects.all()
+    queryset = TestRequest.objects.all().order_by('-created_at')
     template_name = 'lab_management/requests_list.html'
 
 
@@ -72,3 +73,11 @@ class SampleCreateView(CreateView):
     model = Sample
     template_name = 'lab_management/create_sample.html'
     form_class = SampleForm
+    success_url = reverse_lazy('lab_management:requests-list')
+
+    def form_valid(self, form):
+        test_request = TestRequest.objects.get(pk=self.kwargs['pk'])
+        self.object = form.save(commit=False)
+        self.object.request = test_request
+        self.object.save()
+        return HttpResponseRedirect(reverse_lazy('lab_management:requests-list'))
