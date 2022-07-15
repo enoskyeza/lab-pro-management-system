@@ -13,7 +13,7 @@ class TestForm(ModelForm):
 class SampleForm(ModelForm):
     class Meta:
         model = Sample
-        exclude = ('created_at', 'deleted_at', 'is_deleted', 'updated_at')
+        exclude = ('created_at', 'deleted_at', 'is_deleted', 'updated_at', 'request')
 
 
 class TestRequestForm(ModelForm):
@@ -23,6 +23,6 @@ class TestRequestForm(ModelForm):
         widgets = {
             'patient': forms.Select(attrs={'class':'form-select'}),
             'test': forms.Select(attrs={'class':'form-select'}),
-            'sample': forms.Select(attrs={'class':'form-select'}),
+            'type': forms.Select(attrs={'class':'form-select'}),
             'processing_status': forms.Select(attrs={'class':'form-select'}),
         }
