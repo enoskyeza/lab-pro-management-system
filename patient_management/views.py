@@ -32,7 +32,6 @@ class PatientListView(ListView):
     model = Patient
     queryset = Patient.objects.all().filter(is_deleted=False)
     template_name = 'patient_management/patient_list.html'
-    context_object_name = 'patient_list'
 
 
 class PatientDetailView(DetailView):

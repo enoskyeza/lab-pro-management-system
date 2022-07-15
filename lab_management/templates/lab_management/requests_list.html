@@ -1,15 +1,86 @@
-<h1>Requests list url is workinf fine</h1>
+{% extends 'base.html' %}
 
-<h1>List of Requests</h1>
+{% load static %}
 
-{% if requests_list %}
-    <ul>
-        {% for request in requests_list %}
-            <li><a href="{{ request.id }}/">{{ request }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No requests available.</p>
+{% block content %}
+        <!-- content nav start -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Requests</h2>
+            </div>
 
-{% endif %}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i>John Doe
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+      <!-- content nav end -->
+
+        <div class="container-fluid p4">
+
+            {% if object_list %}
+            <table class="table table-striped table-hover">
+                <thead class="table_dark text-white">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Sample ID</th>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Test</th>
+                        <th scope="col">Recorded</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody class='text-uppercase'>
+                    {% for request in object_list %}
+                        {% if request.sample %}
+                            <tr class="clickable-row" data-href="{% url 'lab_management:request-details' pk=request.id %}">
+                                <th scope="row">{{ request.id }}</th>
+                                <th>{{ request.sample.sample_id }}</th>
+                                <td>{{ request.patient }}</td>
+                                <td>{{ request.test }}</td>
+                                <td>{{ request.sample.date_of_collection }}</td>
+                                <td>{{ request.processing_status }}</td>
+                            </tr>
+                        {% else %}
+                            <tr class="" data-href="{% url 'lab_management:request-details' pk=request.id %}">
+                                <th scope="row">{{ request.id }}</th>
+                                <th>
+                                    <a href="{% url 'lab_management:create-sample' pk=request.id %}" class="btn btn-warning btn-sm" role="button" aria-disabled="true"><i class="bi bi-plus me-2"></i> Add Sample</a>
+                                </th>
+                                <td>{{ request.patient }}</td>
+                                <td>{{ request.test }}</td>
+                                <td>{{ request.sample.date_of_collection }}</td>
+                                <td>{{ request.processing_status }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No Requests available.</p>
+
+            {% endif %}
+
+            <a href="{% url 'lab_management:create-request' %}" class="btn btn-success " tabindex="-1" role="button" aria-disabled="true">Create New Request</a>
+        </div>
+
+
+{% endblock  %}

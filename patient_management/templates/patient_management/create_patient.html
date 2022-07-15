@@ -1,7 +1,125 @@
-<h3>Create New Patient </h3>
+{% extends 'base.html' %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+{% load static %}
+
+{% block content %}
+        <!-- content nav start -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Create New Patient</h2>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i>John Doe
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+      <!-- content nav end -->
+        <!-- <div class="container-fluid p4">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save">
+            </form>
+        </div> -->
+
+        <div class="container-fluid px-5 ">
+            <div class="rounded bg-light p-4 my-4">
+                <h3 class="border-bottom pb-2 mb-4">Bio-data</h3>
+                <form method="POST" class="row g-3  gy-4">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <label for="surname" class="form-label">Surname</label>
+                        <div class="input-group">
+                            {{ form.surname }}
+                        </div>
+                    </div>
+                    <div class="col-md-6  gy-4">
+                      <label for="given" class="form-label">Given Name</label>
+                      <div class="input-group">
+                        {{ form.given_name }}
+                      </div>
+                    </div>
+                    <div class="col-md-4  gy-4">
+                      <label for="dob" class="form-label">Date of Birth</label>
+                      <div class="input-group">
+                        {{ form.age }}
+                      </div>
+                    </div>
+                    <div class="col-md-4  gy-4">
+                        <label for="sex" class="form-label">Sex</label>
+                        <div class="">
+                            {{ form.gender }}
+                        </div>
+                    </div>
+                    <div class="col-md-4  gy-4">
+                        <label for="id_number" class="form-label">ID Number</label>
+                        <div class="input-group">
+                            {{ form.id_number }}
+                        </div>
+                    </div>
+                    <h3 class="border-bottom pb-2 mt-4 pt-4">Contact Information</h3>
+                    <div class="col-md-12  gy-4">
+                        <label for="nat" class="form-label">Country</label>
+                        <select id="nat" class="form-select">
+                          <option selected>Choose...</option>
+                          <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6  gy-4">
+                        <label for="adress" class="form-label">Address</label>
+                        <div class="input-group">
+                            {{ form.address }}
+                        </div>
+                        {% comment %} <input type="text" class="form-control" id="adress" placeholder="Apartment, studio, or floor"> {% endcomment %}
+                    </div>
+                    <div class="col-md-3  gy-4">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="phone">
+                    </div>
+                    <div class="col-md-3  gy-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email">
+                    </div>
+                    <div class="col-12  gy-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                            Self-Referal
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 gy-4">
+                    <button type="submit" class="btn btn-warning" value="save"> <i class="bi bi-save me-2"></i>Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+{% endblock  %}
+
+
+
+
+
+
+

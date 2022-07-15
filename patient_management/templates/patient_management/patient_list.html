@@ -1,13 +1,126 @@
-<h1>List of Patients</h1>
+{% extends 'base.html' %}
 
-{% if patient_list %}
-    <ul>
-        {% for patient in object_list %}
-            <li><a href="/patients/{{ patient.id }}/">{{ patient }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No Patients available.</p>
+{% load static %}
 
-{% endif %}
+{% block content %}
+        <!-- content nav start -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Patients</h2>
+            </div>
 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i>John Doe
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- content nav end -->
+        <div class="container-fluid p4">
+            <div class="d-flex justify-content-end py-2 align-items-center">
+                <a class="btn" href="{% url 'patient_management:create-patient' %}"><i class="bi bi-person-plus-fill me-3 h2"></i></a>
+                <div class="dropdown">
+                    <button class="btn" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-filter me-3 h2"></i>
+                    </button>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Filter by Name</a></li>
+                      <li><a class="dropdown-item" href="#">Filter by DOB</a></li>
+                      <li><a class="dropdown-item" href="#">Filter by Nationality</a></li>
+                    </ul>
+                </div>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+            </div>
+            <div class="d-none d-lg-block">
+                <table class="table table-striped table-hover ">
+                    <thead class="table_dark text-white">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Given Name</th>
+                            <th scope="col">Date Of Birth</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Nationality</th>
+                        </tr>
+                    </thead>
+                    <tbody class='text-uppercase'>
+                        {% if object_list %}
+                        {% for patient in object_list %}
+                            <tr class="clickable-row" data-href="{% url 'patient_management:patient-details' pk=patient.pk %}">
+                                <th scope="row">{{ patient.id }}</th>
+                                <td>{{ patient.surname }}</td>
+                                <td>{{ patient.given_name }}</td>
+                                <td>{{ patient.age }}</td>
+                                <td>{{ patient.gender }}</td>
+                                <td>{{ patient.nationality }}</td>
+                            </tr>
+                        {% endfor %}
+                        {% else %}
+                        <p>No Pagination on Patients List available.</p>
+            
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div> 
+            <div class="d-md-none d-sm-block">
+                {% if object_list %}
+                    {% for patient in object_list %}
+                        <div class="card text-uppercase">
+                            <div class="card-body">
+                            <h5 class="card-title">{{ patient }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ patient.age }} | {{ patient.gender}}</h6>
+                            <p class="card-text">{{ patient.nationality}}</p>
+                            </div>
+                        </div> 
+                    {% endfor %}
+                    {% else %}
+                        <p>No Pagination on Patients List available.</p>
+            
+                {% endif %}        
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item" aria-current="page">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+<script>
+    $(".list-group-item").click(function(){
+        $(this).addClass('active').siblings().removeClass('active')
+});
+</script>
+
+{% endblock  %}

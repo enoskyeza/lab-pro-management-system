@@ -9,7 +9,7 @@ from lab_management.views import (
 
 app_name = 'lab_management'
 urlpatterns = [
-    path('', views.index, name='test-index-view'),
+    path('', views.index, name='index-view'),
     path('list', TestListView.as_view(), name='tests-list'),
     path('<int:pk>/', TestDetailView.as_view(), name='test-details'),
     path('new/', TestCreateView.as_view(), name='create-test'),
@@ -18,6 +18,6 @@ urlpatterns = [
     path('requests/<int:pk>/', TestRequestDetailView.as_view(), name='request-details'),
     path('requests/', TestRequestListView.as_view(), name='requests-list'),
     path('requestupdate/<int:pk>', TestRequestUpdateView.as_view(), name='update-request'),
-    path('sample/', SampleCreateView.as_view(), name='create-sample'),
+    path('sample/<int:pk>', SampleCreateView.as_view(), name='create-sample'),
 ]
 
