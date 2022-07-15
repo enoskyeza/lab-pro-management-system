@@ -90,7 +90,7 @@
     transition: all 300ms ease;
   }
 
-  #sidebarmenu .list-group-item:visited{
+  #sidebarmenu .list-group-item:hover{
     margin-left: 1rem;
   } 
 
