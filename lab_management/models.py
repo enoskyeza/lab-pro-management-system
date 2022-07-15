@@ -24,12 +24,13 @@ class SampleType(BaseModel):
 
 class Sample(BaseModel):
     sample_id = models.CharField(max_length=10, unique=True)
-    type = models.ForeignKey(SampleType, null=True, on_delete=models.SET_NULL)
     collection_site = models.CharField(max_length=50)
     date_of_collection = models.DateTimeField(default=timezone.now)
     lab_reference = models.PositiveIntegerField(null=True, blank=True)
     date_of_result = models.DateTimeField(null=True, blank=True)
 
+    def __str__(self):
+        return self.sample_id
 
 class TestRequest(BaseModel):
     class TestRequestProgressStatus(models.TextChoices):
@@ -37,7 +38,12 @@ class TestRequest(BaseModel):
         IN_PROGRESS = 'in_progress', _('IN PROGRESS')
         COMPLETE = 'completed', _('COMPLETED')
 
+    
+    type = models.ForeignKey(SampleType, null=True, on_delete=models.SET_NULL)
     patient = models.ForeignKey(Patient, null=True, on_delete=models.SET_NULL)
     test = models.ForeignKey(Test, null=True, on_delete=models.SET_NULL)
     sample = models.ForeignKey(Sample, blank=True, null=True, on_delete=models.SET_NULL)
     processing_status = models.CharField(max_length=50, choices=TestRequestProgressStatus.choices)
+
+    def __str__(self):
+        return f'{self.test} {self.sample}'
