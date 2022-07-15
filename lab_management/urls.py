@@ -9,7 +9,7 @@ from lab_management.views import (
 
 app_name = 'lab_management'
 urlpatterns = [
-    path('', views.index, name='test-index-view'),
+    path('', views.index, name='index-view'),
     path('list', TestListView.as_view(), name='tests-list'),
     path('<int:pk>/', TestDetailView.as_view(), name='test-details'),
     path('new/', TestCreateView.as_view(), name='create-test'),
