@@ -33,6 +33,7 @@ class TestListView(ListView):
     queryset = Test.objects.filter(is_deleted=False).all()
     template_name = 'lab_management/test_list.html'
     context_object_name = 'tests_list'
+    paginate_by: 1
 
 
 class TestDetailView(DetailView):
@@ -60,10 +61,6 @@ class TestRequestListView(ListView):
     model = TestRequest
     queryset = TestRequest.objects.all()
     template_name = 'lab_management/requests_list.html'
-    context_object_name = 'requests_list'
-
-    def get_queryset(self):
-        return
 
 
 class TestRequestDetailView(DetailView):
