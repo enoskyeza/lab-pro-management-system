@@ -37,8 +37,9 @@
 
 <div class="container-fluid p-3">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex align-items-center">
           Bio-data
+          <a href="{% url 'patient_management:update-patient' pk=patient.id %}" class="btn btn-sm btn-success ms-auto"><i class="bi bi-pencil-fill me-2"></i>Edit</a>
         </div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">

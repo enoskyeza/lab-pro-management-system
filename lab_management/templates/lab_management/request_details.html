@@ -36,24 +36,13 @@
 
 
 <div class="container-fluid p-3">
-    <div class="card">
-        <div class="card-header">
-          Bio-data
-        </div>
-        <div class="card-body">
-          <blockquote class="blockquote mb-0">
-            <p>{{ object.surname }} {{ object.given_name }}</p>
-            <footer class="blockquote-footer">{{ object.gender }} | {{ object.age }} | {{ object.nationality }}</footer>
-          </blockquote>
-        </div>
-    </div>
 
-    <div class="card mt-5">
-        <div class="card-header">
-          Requests
+    <div class="card">
+        <div class="card-header d-flex align-items-center">
+          Request Details
+          <a href="{% url 'lab_management:update-request' pk=object.id %}" class="btn btn-sm btn-success ms-auto"><i class="bi bi-pencil-fill me-2"></i>Edit</a>
         </div>
         <div class="card-body">
-            {% if object.testrequest_set.all %}
             <table class="table table-hover">
                 <thead class="">
                     <tr>
@@ -65,23 +54,30 @@
                     </tr>
                 </thead>
                 <tbody class='text-uppercase'>
-                    {% for request in object.testrequest_set.all %}
                         <tr>
-                            <th scope="row">{{ request.id }}</th>
-                            <th>{{ request.sample.sample_id }}</th>
-                            <td>{{ request.test }}</td>
-                            <td>{{ request.sample.date_of_collection }}</td>
-                            <td>{{ request.processing_status }}</td>
+                            <th scope="row">{{ object.id }}</th>
+                            <th>{{ object.sample.sample_id }}</th>
+                            <td>{{ object.test }}</td>
+                            <td>{{ object.sample.date_of_collection }}</td>
+                            <td>{{ object.processing_status }}</td>
                         </tr>
-                    {% endfor %}
                 </tbody>
             </table>
-            {% else %}
-                    <p>No Requests available.</p>
-        
-            {% endif %}
         </div>
     </div>
+
+    <div class="card mt-5">
+        <div class="card-header">
+          Patient
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>{{ object.patient.surname }} {{ object.patient.given_name }}</p>
+            <footer class="blockquote-footer">{{ object.patient.gender }} | {{ object.patient.age }} | {{ object.patient.nationality }}</footer>
+          </blockquote>
+        </div>
+    </div>
+
 </div>
 
 

@@ -1,9 +1,98 @@
-<h1>Create Test Request urls work well</h1>
+{% extends 'base.html' %}
 
-<h3>Update Request </h3>
+{% load static %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
-</form>
+{% block content %}
+        <!-- content nav start -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0">Update Request</h2>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i>John Doe
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+      <!-- content nav end -->
+        <div class="container-fluid px-4">
+            <!-- <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save">
+            </form> -->
+            <div class="rounded bg-light p-4 my-4 mx-4">
+                <form class="pt=5" method="POST" >    
+                  {% csrf_token %}
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-12 col-form-label">Patient</label>
+                      <div class="col-sm-12">
+                        {{ form.patient }}
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-12 col-form-label">Test</label>
+                        <div class="col-sm-12">
+                          {{ form.test }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-12 col-form-label">Sample Type</label>
+                        <div class="col-sm-12">
+                          {{ form.type }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-12 col-form-label">Status</label>
+                        <div class="col-sm-12">
+                          {{ form.processing_status }}
+                        </div>
+                    </div>
+                    <fieldset class="row mb-3">
+                      <legend class="col-form-label col-sm-12 pt-0"><em>How will results be delivered?</em></legend>
+                      <div class="col-sm-11">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                          <label class="form-check-label" for="gridRadios1">
+                            Email
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                          <label class="form-check-label" for="gridRadios2">
+                            Whatsapp
+                          </label>
+                        </div>
+                        <div class="form-check disabled">
+                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                          <label class="form-check-label" for="gridRadios3">
+                            Collect from Lab
+                          </label>
+                        </div>
+                      </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-warning" value="save"><i class="bi bi-save me-2"></i>Save</button>
+                </form>
+            </div>
+        </div>
+
+
+{% endblock  %}

@@ -36,7 +36,7 @@ class TestRequest(BaseModel):
     processing_status = models.CharField(max_length=50, choices=TestRequestProgressStatus.choices)
 
     def __str__(self):
-        return self.test.name
+        return f'{self.test.name} - {self.patient.surname} {self.patient.given_name}'
 
     def has_related_object(self):
         return hasattr(self, 'sample')
@@ -52,3 +52,5 @@ class Sample(BaseModel):
     
     def __str__(self):
         return self.sample_id
+
+        

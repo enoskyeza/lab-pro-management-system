@@ -4,16 +4,6 @@ from . import models
 
 
 class PatientForm(forms.ModelForm):
-    # def __innit__(self, *args, **kwargs):
-    #     super(PatientForm, self).__init__(*args, **kwargs)
-    #     self.fields["surname"].widget.attrs.update({
-    #         'required':'',
-    #         'name':'surname',
-    #         'id':'surname',
-    #         'type':'password',
-    #         'class':'form-control',
-    #         })
-
     class Meta:
         model = models.Patient
         exclude = ('created_at', 'deleted_at', 'is_deleted', 'updated_at')

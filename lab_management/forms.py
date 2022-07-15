@@ -14,6 +14,15 @@ class SampleForm(ModelForm):
     class Meta:
         model = Sample
         exclude = ('created_at', 'deleted_at', 'is_deleted', 'updated_at', 'request')
+        widgets = {
+            'sample_id': forms.TextInput(attrs={'class':'form-control'}),
+            'date_of_collection': forms.DateTimeInput(attrs={
+                'required': True,
+                'type': 'datetime-local',
+                'class':'form-control'}),
+            'collection_site': forms.TextInput(attrs={'class':'form-select'}),
+            'lab_reference': forms.TextInput(attrs={'class':'form-control'}),
+        }
 
 
 class TestRequestForm(ModelForm):
@@ -26,3 +35,4 @@ class TestRequestForm(ModelForm):
             'type': forms.Select(attrs={'class':'form-select'}),
             'processing_status': forms.Select(attrs={'class':'form-select'}),
         }
+

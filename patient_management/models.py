@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django_countries.fields import CountryField
 
 from core.models import BaseModel
 
@@ -13,7 +14,7 @@ class Patient(BaseModel):
     given_name = models.CharField(max_length=50)
     age = models.DateField(verbose_name='Date of Birth')
     gender = models.CharField(max_length=1, choices=PatientGender.choices)
-    nationality = models.CharField(max_length=50, null=True, blank=True)
+    nationality = CountryField()
     id_number = models.CharField(verbose_name='ID Number', max_length=50, blank=True)
     address = models.CharField(max_length=100, blank=True)
 

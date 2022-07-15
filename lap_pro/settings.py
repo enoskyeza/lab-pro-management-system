@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'patient_management',
     'lab_management',
     'user',
+    'django_countries',
 
     'django.contrib.admin',
     'django.contrib.auth',
